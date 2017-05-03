@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from django.core.urlresolvers import reverse_lazy
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social.apps.django_app.default',
     "social_django",
+    'registration',
 
 ]
 
@@ -60,6 +63,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
                 os.path.join(BASE_DIR, 'templates'),
+                os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -116,7 +120,7 @@ SOCIAL_AUTH_FACEBOOK_KEY = '215787955587969'
 
 SOCIAL_AUTH_FACEBOOK_SECRET = 'd56ed7ca7745e24997e89eaff2e73154' 
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/"
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = "hecho"
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -130,8 +134,34 @@ USE_L10N = True
 
 USE_TZ = True
 
+#MEDIA_ROOT = '/Booker/mysite/media/'
+
+#MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL=reverse_lazy('hecho')
+ACCOUNT_ACTIVATION_DAYS=365
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+EMAIL_USE_TLS = True
+EMAIL_HOST='mmarcsola@gmail.com'
+EMAIL_HOST_USER = 'mmarcsola@gmail.com'
+EMAIL_HOST_PASSWORD = 'car18434@'
+#EMAIL_PORT = 587
+SERVER_EMAIL = 'mmarcsola@gmail.com'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static', 'media')
+
+STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static', 'static-only')
+
+STATICFILES_DIRS = (
+    os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static', 'static'),
+)

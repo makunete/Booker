@@ -13,12 +13,46 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+"""from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import include
 
 urlpatterns = [
-	#url(r'^booker/', include('booker.urls')),
+	url(r'^booker/', include('booker.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^login/', include('social.apps.django_app.urls', namespace='social')),
+]"""
+
+import django
+
+from django.conf.urls import include, url
+from django.contrib import admin
+from django.views.generic import TemplateView
+from booker import views
+from django.conf import settings
+from django.contrib.auth import views as auth_views
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+urlpatterns = [ 
+	url(r'^admin/', include(admin.site.urls)),
+	# Python Social Auth URLs
+	url('', include('social.apps.django_app.urls', namespace='social')),
+	url(r'^accounts/', include('registration.urls')),
+	# Home URL
+	url(r'^$', TemplateView.as_view(template_name="home.html"), name="home"),
+	url(r'^libros/', views.LibrosCreateView.as_view(success_url='/hecho'), name="compres" ),
+	url(r'^hecho/', views.LibrosListView.as_view(), name="hecho"),
+	# Logout URL
+	url( r'^users/logout/$', auth_views.LogoutView.as_view() , {'next_page': '/'}, name="user-logout" ),
+
+	#url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {
+    #   'document_root': settings.STATIC_ROOT
+    #}),
+    url(r'^media/(?P<path>.*)$', django.views.static.serve, {
+        'document_root': settings.MEDIA_ROOT
+    }),
 ]
+
+#urlpatterns += staticfiles_urlpatterns()
+#urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
