@@ -1,0 +1,25 @@
+{% extends "home.html" %}
+
+
+{% block content %}
+<div class="container register">
+<h2>LIBROS</h2>
+
+<ol>
+{% for libros in libros_list %}
+	
+		<h3>{{libros.nombre}}</h3>  <!--{{libros.genero}}--><br/>
+		<img src="{{libros.portada.url}}" height="324" width="250" ><br/>
+		{{libros.sinopsis}}<br/>
+
+	
+
+		
+{% empty %}
+	<li>No hay ningun libro</li>
+{% endfor %}
+</ol>
+
+<button type="button" onclick="location.href='/libros'">Return</button>
+</div>
+{% endblock %}
