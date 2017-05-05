@@ -1,16 +1,27 @@
 {% extends "home.html" %}
 {% load i18n %}
 
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+
 {% block content %}
 <div class="container register">
 <h2>SUBE TU LIBRO</h2><br/>
+
+
 <form enctype="multipart/form-data" method="post" action=".">
   {% csrf_token %}
-  {{ form.as_p }}
+  {% bootstrap_form form %}
+  
+  {% buttons %}
 
   <input type="submit" value="{% trans 'Submit' %}" />
 
+  {% endbuttons %}
+
 </form>
-<button type="button" onclick="location.href='/hecho'">Libros</button>
+<button type="button" class="btn btn-success" onclick="location.href='/hecho'">Libros</button>
 </div>
 {% endblock %}

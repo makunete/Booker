@@ -16,7 +16,7 @@ class LibrosCreateView(CreateView):
 	# indiquem la plantilla personalitzada i els camps que han d'apareixer al formulari
 	# veureu que la plantilla es molt senzilla ja que fa tot el formulari amb {{form.as_p}}
 	template_name = "libros.html"
-	fields = ['nombre','genero','portada','sinopsis']
+	fields = ['nombre','genero','portada','contenido','sinopsis']
 
 class LibrosListView(ListView):
 	model = Libros

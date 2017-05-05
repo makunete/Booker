@@ -5,21 +5,41 @@
 <div class="container register">
 <h2>LIBROS</h2>
 
-<ol>
+
 {% for libros in libros_list %}
 	
-		<h3>{{libros.nombre}}</h3>  <!--{{libros.genero}}--><br/>
-		<img src="{{libros.portada.url}}" height="324" width="250" ><br/>
-		{{libros.sinopsis}}<br/>
+	<div class="col-md-4 well">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ libros.nombre }}</h3>
+            </div>
+                <div class="panel-body">
 
-	
+                    {% for generos in libros.genero.all %}
+   						{{ generos }}
+					{% endfor %}
+					<br/>
+                    <img src="{{libros.portada.url}}" height="324" width="250" ><br/>
+                    {{libros.sinopsis}}
+                    
 
-		
+                </div>
+                    
+        </div>
+    </div>
+
+
+
+
+
 {% empty %}
-	<li>No hay ningun libro</li>
+	No hay ningun libro
 {% endfor %}
-</ol>
 
-<button type="button" onclick="location.href='/libros'">Return</button>
+
+
+</div>
+<div class="container register">
+	<button type="button" class="btn btn-success" onclick="location.href='/libros'">Formulario</button>
 </div>
 {% endblock %}

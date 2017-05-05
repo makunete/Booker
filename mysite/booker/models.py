@@ -19,6 +19,7 @@ class Libros(models.Model):
 	nombre=models.CharField(max_length=50, default='')
 	genero=models.ManyToManyField(Genero)
 	portada=models.ImageField(upload_to='booker/images')
+	contenido=models.FileField(upload_to='booker/libros',default='')
 	sinopsis=models.CharField(max_length=600,default='')
 	
 	
